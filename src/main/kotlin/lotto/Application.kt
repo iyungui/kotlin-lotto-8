@@ -4,10 +4,9 @@ import camp.nextstep.edu.missionutils.Randoms
 
 fun main() {
     val inputView = InputView()
+    val outputView = OutputView()
 
     val amount = inputView.readPurchaseAmount()
-    val winningNumbers = inputView.readWinningNumbers()
-    val bonusNumber = inputView.readBonusNumber(winningNumbers)
 
     val lottoCount = amount / 1000
     val lottos = mutableListOf<Lotto>()
@@ -18,14 +17,14 @@ fun main() {
         lottos.add(lotto)
     }
 
-    println()
-    println("${lottoCount}개를 구매했습니다.")
+    outputView.printLottos(lottos)
 
-    lottos.forEach { lotto ->
-        val matchCount = lotto.countMatch(winningNumbers)
-        val hasBonus = lotto.containsBonus(bonusNumber)
-        val rank = Rank.from(matchCount, hasBonus)
+    val winningNumbers = inputView.readWinningNumbers()
+    val bonusNumber = inputView.readBonusNumber(winningNumbers)
 
-        println("$lotto - 등수: $rank, 상금: ${rank.prize}원")
-    }
+    val lottoResult = LottoResult(lottos)
+    val rankCount = lottoResult.calculate(winningNumbers, bonusNumber)
+    val profitRate = lottoResult.calculateProfitRate(rankCount, amount)
+
+    outputView.printStatistics(rankCount, profitRate)
 }

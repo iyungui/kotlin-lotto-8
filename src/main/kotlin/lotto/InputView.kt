@@ -13,7 +13,7 @@ class InputView {
                 InputValidator.validatePurchaseAmount(amount)
                 return amount
             } catch (e: NumberFormatException) {
-                println(e.message)
+                println("[ERROR] 구입 금액은 숫자여야 합니다.")
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
@@ -23,6 +23,7 @@ class InputView {
     fun readWinningNumbers(): List<Int> {
         while (true) {
             try {
+                println()
                 println("당첨 번호를 입력해 주세요.")
                 val input = Console.readLine()
                 val numbers = input.split(",").map { it.trim().toInt() }
@@ -40,6 +41,7 @@ class InputView {
     fun readBonusNumber(winningNumbers: List<Int>): Int {
         while (true) {
             try {
+                println()
                 println("보너스 번호를 입력해 주세요.")
                 val input = Console.readLine()
                 val bonusNumber = input.toInt()
