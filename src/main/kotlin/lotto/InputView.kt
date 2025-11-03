@@ -10,7 +10,7 @@ class InputView {
                 val input = Console.readLine()
                 val amount = input.toInt()
 
-                validatePurchaseAmount(amount)
+                InputValidator.validatePurchaseAmount(amount)
                 return amount
             } catch (e: NumberFormatException) {
                 println(e.message)
@@ -27,7 +27,7 @@ class InputView {
                 val input = Console.readLine()
                 val numbers = input.split(",").map { it.trim().toInt() }
 
-                validateWinningNumbers(numbers)
+                InputValidator.validateWinningNumbers(numbers)
                 return numbers
             } catch (e: NumberFormatException) {
                 println("[ERROR] 당첨 번호는 숫자여야 합니다.")
@@ -44,7 +44,7 @@ class InputView {
                 val input = Console.readLine()
                 val bonusNumber = input.toInt()
 
-                validateBonusNumber(bonusNumber, winningNumbers)
+                InputValidator.validateBonusNumber(bonusNumber, winningNumbers)
                 return bonusNumber
             } catch (e: NumberFormatException) {
                 println("[ERROR] 보너스 번호는 숫자여야 합니다.")

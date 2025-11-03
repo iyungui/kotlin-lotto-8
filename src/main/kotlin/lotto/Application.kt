@@ -1,13 +1,25 @@
 package lotto
 
+import camp.nextstep.edu.missionutils.Randoms
+
 fun main() {
     val inputView = InputView()
 
     val amount = inputView.readPurchaseAmount()
-    val winningNumbers = inputView.readWinningNumbers()
-    val bonusNumber = inputView.readBonusNumber()
+//    val winningNumbers = inputView.readWinningNumbers()
+//    val bonusNumber = inputView.readBonusNumber()
 
-    println("입력한 금액: ${amount}원")
-    println("입력한 당첨 번호: $winningNumbers")
-    println("입력한 보너스 번호: $bonusNumber")
+    val lottoCount = amount / 1000
+    val lottos = mutableListOf<Lotto>()
+
+    repeat(lottoCount) {
+        val numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6)
+        val lotto = Lotto(numbers.sorted())
+        lottos.add(lotto)
+    }
+    println()
+    println("${lottoCount}개를 구매했습니다.")
+    lottos.forEach { lotto ->
+        println(lotto)
+    }
 }
