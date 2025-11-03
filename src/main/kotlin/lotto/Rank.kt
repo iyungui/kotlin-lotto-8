@@ -8,5 +8,24 @@ enum class Rank(val matchCount: Int, val prize: Int) {
     FIFTH(3, 5_000),
     NONE(0, 0);
 
-    
+    companion object {
+        fun from(matchCount: Int, hasBonus: Boolean): Rank {
+            if (matchCount == 6) {
+                return FIRST
+            }
+            if (matchCount == 5 && hasBonus) {
+                return SECOND
+            }
+            if (matchCount == 5) {
+                return THIRD
+            }
+            if (matchCount == 4) {
+                return FOURTH
+            }
+            if (matchCount == 3) {
+                return FIFTH
+            }
+            return NONE
+        }
+    }
 }
